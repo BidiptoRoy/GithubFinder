@@ -1,5 +1,5 @@
 const GITHUB_URL = process.env.REACT_APP_GITHUB_URL;
-const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
+// const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
 
   // search users
 export const searchUsers = async (text) => {
@@ -8,11 +8,7 @@ export const searchUsers = async (text) => {
       q: text,
     });
 
-    const response = await fetch(`${GITHUB_URL}/search/users?${params}`, {
-      headers: {
-        Authorization: `token ${GITHUB_TOKEN}`,
-      },
-    });
+    const response = await fetch(`${GITHUB_URL}/search/users?${params}`);
     // console.log(response)
     const { items } = await response.json();
 
@@ -27,11 +23,7 @@ export const searchUsers = async (text) => {
     });
 
 
-    const response = await fetch(`${GITHUB_URL}/users/${login}/repos?${params}`, {
-      headers: {
-        Authorization: `token ${GITHUB_TOKEN}`,
-      },
-    });
+    const response = await fetch(`${GITHUB_URL}/users/${login}/repos?${params}`);
     const data = await response.json();
     return data
   };
@@ -39,11 +31,7 @@ export const searchUsers = async (text) => {
   // get single user
  export const getUser = async (login) => {
 
-    const response = await fetch(`${GITHUB_URL}/users/${login}`, {
-      headers: {
-        Authorization: `token ${GITHUB_TOKEN}`,
-      },
-    });
+    const response = await fetch(`${GITHUB_URL}/users/${login}`);
 
     if (response.status === 404) {
       window.location = "/notfound";
